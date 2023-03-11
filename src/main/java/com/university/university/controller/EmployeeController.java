@@ -5,29 +5,40 @@ import com.university.university.model.entity.Employee;
 import com.university.university.repository.EmpRepo;
 import com.university.university.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/api/v1")
 public class EmployeeController {
 
     @Autowired
     private EmpService empService ;
 
 
-    @GetMapping("/get-emp")
-    public Employee getUser(@RequestParam Integer id ){
-      return empService.getUser(1);
+    @GetMapping("/Employees/{id}")
+    public Employee getEmployeeById(@PathVariable("id") Integer id){
+      return empService.getEmployeeById(id);
     }
-    @GetMapping("/get-all")
-    public Employee getAll(@RequestParam Integer id ){
-        return empService.getUser(1);
+    @PostMapping("/Employees")
+    public Employee addEmployee(@RequestBody Employee employee){
+        return empService.addEmployee(employee);
+    }
+    @PutMapping ("/Employees")
+    public Employee updateEmployee(@RequestBody Employee employee){
+        return empService.updateEmployee(employee);
     }
 
+    @GetMapping("/Employees")
+    public Collection<Employee> getAllEmployees(){
+        return empService.getAllEmployee();
+    }
 
-
+    @DeleteMapping("/Employees/{id}")
+    public void deleteEmployee(@PathVariable("id") Integer id){
+         empService.deleteEmployee(id);
+    }
 
 }
