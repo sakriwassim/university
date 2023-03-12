@@ -1,6 +1,7 @@
 package com.university.university.controller;
 
 
+import com.university.university.model.dto.EmployeeDto;
 import com.university.university.model.entity.Employee;
 import com.university.university.repository.EmpRepo;
 import com.university.university.service.EmpService;
@@ -19,16 +20,16 @@ public class EmployeeController {
 
 
     @GetMapping("/Employees/{id}")
-    public Employee getEmployeeById(@PathVariable("id") Integer id){
+    public EmployeeDto getEmployeeById(@PathVariable("id") Integer id){
       return empService.getEmployeeById(id);
     }
     @PostMapping("/Employees")
-    public Employee addEmployee(@RequestBody Employee employee){
-        return empService.addEmployee(employee);
+    public EmployeeDto addEmployee(@RequestBody Employee employee){
+        return empService.addEmployee(EmployeeDto.toDto(employee));
     }
     @PutMapping ("/Employees")
-    public Employee updateEmployee(@RequestBody Employee employee){
-        return empService.updateEmployee(employee);
+    public EmployeeDto updateEmployee(@RequestBody Employee employee){
+        return empService.updateEmployee(EmployeeDto.toDto(employee));
     }
 
     @GetMapping("/Employees")

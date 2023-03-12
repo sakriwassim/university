@@ -1,4 +1,5 @@
 package com.university.university.service;
+import com.university.university.model.dto.EmployeeDto;
 import com.university.university.model.entity.Employee;
 import com.university.university.repository.EmpRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +11,19 @@ public class EmpService {
     @Autowired
     private EmpRepo empRepo ;
 
-    public Employee getEmployeeById(Integer id ){
+    public EmployeeDto getEmployeeById(Integer id ){
         Optional<Employee> emp = empRepo.findById(id);
-        return emp.orElse(null);
+        if (emp.isPresent())return EmployeeDto.toDto(emp.get());
+        return null;
+
     }
 
-    public  Employee addEmployee(Employee employee){
-        Employee emp = empRepo.save(employee);
-        return emp;
+    public  EmployeeDto addEmployee(EmployeeDto employee){
+
+        return EmployeeDto.toDto(empRepo.save(Employee.ToEntity(employee)));
     }
-    public  Employee updateEmployee(Employee employee){
-        Employee updated = empRepo.save(employee);
+    public  EmployeeDto updateEmployee(EmployeeDto employee){
+        EmployeeDto updated = EmployeeDto.toDto(empRepo.save(Employee.ToEntity(employee)));
         return updated;
     }
 

@@ -1,6 +1,7 @@
 package com.university.university.model.entity;
 
 
+import com.university.university.model.dto.EmployeeDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +22,18 @@ public class Employee {
     private String firstname;
     private String lastname;
     private Double salary;
+
+
+    public static Employee ToEntity (EmployeeDto dto){
+        return Employee.builder()
+                .id(dto.getId())
+                .firstname(dto.getFirstname())
+                .lastname(dto.getLastname())
+                .salary(dto.getSalary())
+                .build();
+    }
+
+
+
 
 }
