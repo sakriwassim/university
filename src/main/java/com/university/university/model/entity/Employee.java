@@ -1,13 +1,12 @@
 package com.university.university.model.entity;
 
-
-import com.university.university.model.dto.EmployeeDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Table(name = "employees")
 @Entity
@@ -24,16 +23,22 @@ public class Employee {
     private Double salary;
 
 
-    public static Employee ToEntity (EmployeeDto dto){
-        return Employee.builder()
-                .id(dto.getId())
-                .firstname(dto.getFirstname())
-                .lastname(dto.getLastname())
-                .salary(dto.getSalary())
-                .build();
-    }
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
 
+    @ManyToMany
+    @JoinTable(
+            name = "employee_mission",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "misson_id")
+    )
+    private List<Mission> missions;
 
 
 }
