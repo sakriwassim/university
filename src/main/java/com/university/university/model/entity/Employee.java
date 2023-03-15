@@ -21,6 +21,7 @@ public class Employee {
     private String firstname;
     private String lastname;
     private Double salary;
+    private Integer addressid;
 
 
     @OneToOne
