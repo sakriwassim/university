@@ -1,9 +1,7 @@
 package com.university.university.controller;
 import com.university.university.model.entity.Employee;
-import com.university.university.repository.EmpRepo;
 import com.university.university.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -21,12 +19,12 @@ public class EmployeeController {
       return empService.getEmployeeById(id);
     }
     @PostMapping("/Employees")
-    public Employee addEmployee(@RequestBody Employee employee){
-        return empService.addEmployee(employee);
+    public Employee addEmployee(@RequestBody Employee employee, @RequestParam Integer idAdress){
+        return empService.addEmployee(employee, idAdress);
     }
     @PutMapping ("/Employees")
-    public Employee updateEmployee(@RequestBody Employee employee){
-        return empService.updateEmployee(employee);
+    public Employee updateEmployee(@RequestBody Employee employee,@RequestBody Integer idAdress){
+        return empService.updateEmployee(employee , idAdress);
     }
 
     @GetMapping("/Employees")
