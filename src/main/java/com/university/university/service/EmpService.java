@@ -27,7 +27,7 @@ public class EmpService {
     }
 
     public  Employee addEmployee(Employee employee){
-      Integer idAddress = employee.getAddressid();
+      Integer idAddress = employee.getAddress().getId();
      Address address = adsRepo.findById(idAddress).orElse(null);
      if (address != null) {
          employee.setAddress(address);
@@ -55,7 +55,8 @@ public class EmpService {
             dto.setId(employee.getId());
             dto.setFirstname(employee.getFirstname());
             dto.setSalary(employee.getSalary());
-            dto.setAddressid(employee.getAddressid());
+
+//          dto.setAddressid(employee.getAddress().getId());
             dtos.add(dto);
         }
        return dtos;
