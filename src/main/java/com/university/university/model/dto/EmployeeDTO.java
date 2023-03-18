@@ -7,15 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-    public  class EmployeeDto {
+    public  class EmployeeDTO {
 
     private Integer id;
     private String firstname;
@@ -23,8 +19,8 @@ import javax.persistence.Id;
     private Double salary;
     private Integer addressid;
 
-    public  static EmployeeDto toDto(Employee entity){
-        return EmployeeDto.builder()
+    public  static EmployeeDTO toDto(Employee entity){
+        return EmployeeDTO.builder()
                 .id(entity.getId())
                 .firstname(entity.getFirstname())
                 .lastname(entity.getLastname())

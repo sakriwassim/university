@@ -1,5 +1,5 @@
 package com.university.university.service;
-import com.university.university.model.dto.EmployeeDto;
+import com.university.university.model.dto.EmployeeDTO;
 import com.university.university.model.entity.Address;
 import com.university.university.model.entity.Employee;
 import com.university.university.repository.AdsRepo;
@@ -18,10 +18,10 @@ public class EmpService {
     @Autowired
     private AdsRepo adsRepo ;
 
-    public EmployeeDto getEmployeeById(Integer id ){
+    public EmployeeDTO getEmployeeById(Integer id ){
         Optional<Employee> emp = employeeRepo.findById(id);
         if (emp.isPresent())
-            return EmployeeDto.toDto(emp.get());
+            return EmployeeDTO.toDto(emp.get());
         else
         return null;
     }
@@ -47,11 +47,11 @@ public class EmpService {
     }
 
 
-    public  Collection<EmployeeDto> getAllEmployee(){
+    public  Collection<EmployeeDTO> getAllEmployee(){
          Collection<Employee> employees = employeeRepo.findAll();
-        List<EmployeeDto> dtos = new ArrayList<>();
+        List<EmployeeDTO> dtos = new ArrayList<>();
         for (Employee employee : employees) {
-            EmployeeDto dto = new EmployeeDto();
+            EmployeeDTO dto = new EmployeeDTO();
             dto.setId(employee.getId());
             dto.setFirstname(employee.getFirstname());
             dto.setSalary(employee.getSalary());
