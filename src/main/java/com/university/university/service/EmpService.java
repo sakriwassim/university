@@ -26,24 +26,19 @@ public class EmpService {
         return null;
     }
 
-    public  Employee addEmployee(Employee employee){
-      Integer idAddress = employee.getAddress().getId();
-     Address address = adsRepo.findById(idAddress).orElse(null);
-     if (address != null) {
-         employee.setAddress(address);
-       //  employee.setAddressid(idAddress);
-         Employee added = employeeRepo.save(employee);
-         return added;
-        }
-        System.out.println("any address find with this id");
-        return null;
+    public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = EmployeeDTO.toEntity(employeeDTO);
+        Employee saverEmployee =  employeeRepo.save(employee);
+        return  EmployeeDTO.toDto(saverEmployee);
     }
 
-    public  Employee updateEmployee(Employee employee, Integer idAdress){
-        Address  address = adsRepo.findById(idAdress).orElse(null);
-        employee.setAddress(address);
+
+
+    public  EmployeeDTO updateEmployee(EmployeeDTO employeeDTO){
+        //Address  address = adsRepo.findById(idAdress).orElse(null);
+        Employee employee = EmployeeDTO.toEntity(employeeDTO);
         Employee updated = employeeRepo.save(employee);
-        return updated;
+        return EmployeeDTO.toDto(updated);
     }
 
 
@@ -54,9 +49,14 @@ public class EmpService {
             EmployeeDTO dto = new EmployeeDTO();
             dto.setId(employee.getId());
             dto.setFirstname(employee.getFirstname());
+            dto.setLastname(employee.getLastname());
             dto.setSalary(employee.getSalary());
 
-//          dto.setAddressid(employee.getAddress().getId());
+            if (employee.getAddress() != null){
+                dto.setAddressid(employee.getAddress().getId());
+            }else {
+                dto.setAddressid(null);
+            }
             dtos.add(dto);
         }
        return dtos;

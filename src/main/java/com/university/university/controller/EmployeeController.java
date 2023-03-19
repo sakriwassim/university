@@ -20,13 +20,12 @@ public class EmployeeController {
       return empService.getEmployeeById(id);
     }
     @PostMapping("/Employees")
-    public Employee addEmployee(@RequestBody Employee employee){
-
+        public EmployeeDTO addEmployee(@RequestBody EmployeeDTO employee){
         return empService.addEmployee(employee);
     }
     @PutMapping ("/Employees")
-    public Employee updateEmployee(@RequestBody Employee employee,@RequestBody Integer idAdress){
-        return empService.updateEmployee(employee , idAdress);
+    public EmployeeDTO updateEmployee(@RequestBody EmployeeDTO employee ){
+        return empService.updateEmployee(employee );
     }
 
     @GetMapping("/Employees")
